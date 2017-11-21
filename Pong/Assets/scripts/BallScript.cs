@@ -16,4 +16,15 @@ public class BallScript : MonoBehaviour {
 	void Update () {
 
 	}
+
+	void OnTriggerEnter2D(Collider2D c2d){
+		if (c2d.gameObject.tag == "right") {
+			myBody.velocity = Vector2.zero;
+			transform.position = new Vector3 (0, 0, 0);
+		}
+		if (c2d.gameObject.tag == "left") {
+			myBody.velocity = Vector2.zero;
+			transform.position = new Vector3 (0, 0, 0);
+		}
+	}
 }
