@@ -8,10 +8,11 @@ public class PlayerBar : MonoBehaviour {
 	private bool upKeyPressed = false, downKeyPressed = false;
 	private int barDirection = 0;
 
+	public int scr1;
+
 	Transform myTransform;    // reference to the object's transform
 	int direction = 0; // 0 = parado, 1= cima, -1 = baixo
 	float previousPositionY;
-
 
 	public uint barVelocity;
 
