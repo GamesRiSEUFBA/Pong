@@ -9,7 +9,7 @@ EditorBuildSettings:
     path: Assets/scenes/mainMenu.unity
     guid: 26cedb3b7637a463f82cad8ddf207323
   - enabled: 1
-    path: Assets/scenes/main.unity
+    path: Assets/scenes/ChallengeLevel01.unity
     guid: 92cd8c8478e344976a7dcc81c01b23bd
   - enabled: 1
     path: Assets/scenes/CompetitionLevel01.unity

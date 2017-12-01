@@ -5,10 +5,10 @@ using UnityEngine.SceneManagement;
 
 public class LoadOnClick : MonoBehaviour {
 
-	public void loadScene(int opc)
+	public void loadScene(int dest)
 	{
-		print (opc);
+		print (dest);
 		//Application.LoadLevel (opc);
-		SceneManager.LoadScene(opc, LoadSceneMode.Additive);
+		SceneManager.LoadScene(dest, LoadSceneMode.Single);
 	}
 }

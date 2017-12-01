@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using UnityEngine.SceneManagement;
 using UnityEngine;
 
 public class PlayerBar : MonoBehaviour {
@@ -22,6 +23,9 @@ public class PlayerBar : MonoBehaviour {
 	}
 
 	void Update () {
+		if (Input.GetKeyDown (KeyCode.Escape))
+			SceneManager.LoadScene (0, LoadSceneMode.Single);
+
 		if (Input.GetKeyDown (KeyCode.UpArrow)) {
 			upKeyPressed = true;
 		} else if (Input.GetKeyDown (KeyCode.DownArrow)) {
