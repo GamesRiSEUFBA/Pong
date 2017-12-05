@@ -52,6 +52,6 @@ public class PlayerBar : MonoBehaviour {
 	void OnCollisionExit2D(Collision2D other)
 	{
 		float adjust = 5 * barDirection;
-		other.rigidbody.velocity = new Vector2(other.rigidbody.velocity.x, other.rigidbody.velocity.y + adjust);        
+//		other.rigidbody.velocity = new Vector2(other.rigidbody.velocity.x, other.rigidbody.velocity.y + adjust);        
 	}
 }

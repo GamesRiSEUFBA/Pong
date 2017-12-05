@@ -9,7 +9,7 @@ EditorBuildSettings:
     path: Assets/scenes/mainMenu.unity
     guid: 26cedb3b7637a463f82cad8ddf207323
   - enabled: 1
-    path: Assets/scenes/ChallengeLevel01.unity
+    path: Assets/ChallengeLevel01.unity
     guid: 92cd8c8478e344976a7dcc81c01b23bd
   - enabled: 1
     path: Assets/scenes/CompetitionLevel01.unity
@@ -17,3 +17,6 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/scenes/Customization.unity
     guid: 6f40f4b61f3a04681b61456897c9f9f6
+  - enabled: 1
+    path: Assets/scenes/GameOver.unity
+    guid: 3b0e684a5b14c4dd8b9615089af36b29
