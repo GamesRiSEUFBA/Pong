@@ -258,7 +258,7 @@ GameObject:
   - component: {fileID: 299359168}
   m_Layer: 0
   m_Name: left
-  m_TagString: left
+  m_TagString: parede
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -395,7 +395,7 @@ GameObject:
   - component: {fileID: 495684249}
   m_Layer: 0
   m_Name: player_01
-  m_TagString: Untagged
+  m_TagString: bar
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -843,6 +843,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   forceValue: 7
   ballPrefab: {fileID: 797685723}
+  speed: 0
 --- !u!1 &850306397
 GameObject:
   m_ObjectHideFlags: 0
@@ -857,7 +858,7 @@ GameObject:
   - component: {fileID: 850306402}
   m_Layer: 0
   m_Name: player_02
-  m_TagString: Untagged
+  m_TagString: bar
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1157,7 +1158,7 @@ GameObject:
   - component: {fileID: 2110116948}
   m_Layer: 0
   m_Name: right
-  m_TagString: right
+  m_TagString: parede
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

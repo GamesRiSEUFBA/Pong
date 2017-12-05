@@ -9,6 +9,8 @@ TagManager:
   - ball
   - button_computer
   - button_player
+  - parede
+  - bar
   layers:
   - Default
   - TransparentFX
