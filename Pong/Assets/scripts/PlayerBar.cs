@@ -11,9 +11,7 @@ public class PlayerBar : MonoBehaviour {
 
 	public int scr1;
 
-	Transform myTransform;    // reference to the object's transform
 	int direction = 0; // 0 = parado, 1= cima, -1 = baixo
-	float previousPositionY;
 
 	public uint barVelocity;
 
@@ -46,12 +44,5 @@ public class PlayerBar : MonoBehaviour {
 			barDirection = 0;
 
 		barRb.velocity = new Vector2(barRb.velocity.x, barDirection * ((int) barVelocity));
-	}
-
-
-	void OnCollisionExit2D(Collision2D other)
-	{
-		float adjust = 5 * barDirection;
-//		other.rigidbody.velocity = new Vector2(other.rigidbody.velocity.x, other.rigidbody.velocity.y + adjust);        
 	}
 }

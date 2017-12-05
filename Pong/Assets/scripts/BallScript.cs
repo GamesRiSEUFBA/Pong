@@ -4,12 +4,12 @@ using System.Collections;
 
 public class BallScript : MonoBehaviour {
 
-	[SerializeField]
-	float forceValue = 4.5f;
-
 	public GameObject ballPrefab;
 
-	private Rigidbody2D myBody;
+	private Rigidbody2D barRb;
+	private Rigidbody2D enBarRb;
+
+	private Rigidbody2D ballRb;
 	private Transform ballTr;
 	private Vector3 pos;
 
@@ -28,7 +28,7 @@ public class BallScript : MonoBehaviour {
 	// Adiciona uma força inicial
 	void Start () {
 		ballTr = GetComponent<Transform> ();
-		myBody = GetComponent<Rigidbody2D>();
+		ballRb = GetComponent<Rigidbody2D>();
 
 		score1 = GameObject.Find ("Score1").GetComponent<Text> ();
 		score2 = GameObject.Find ("Score2").GetComponent<Text> ();
@@ -36,7 +36,10 @@ public class BallScript : MonoBehaviour {
 		playerSc = GameObject.Find ("player_01").GetComponent<PlayerBar> ();
 		enemySc = GameObject.Find ("player_02").GetComponent<EnemyBar> ();
 
-		//myBody.AddForce (new Vector2 (forceValue * 50, 50));
+		barRb = GameObject.Find ("player_01").GetComponent<Rigidbody2D> ();
+		enBarRb = GameObject.Find ("player_02").GetComponent<Rigidbody2D> ();
+
+		//ballRb.AddForce (new Vector2 (forceValue * 50, 50));
 
 		pos = ballTr.position;
 
@@ -49,13 +52,15 @@ public class BallScript : MonoBehaviour {
 
 	// Nada no update
 	void Update () {
-		myBody.velocity = new Vector2 (velBX, velBY);
+		ballRb.velocity = new Vector2 (velBX, velBY);
+
+		if (ballRb.position.x > enBarRb.position.x || ballRb.position.x < barRb.position.x)
+			restartOver();
 	}
 
 	void OnCollisionEnter2D (Collision2D colisao) {
 		if (colisao.gameObject.tag == "parede") {
 			velBY *= -1;
-			restartOver ();
 		}
 		if (colisao.gameObject.tag == "bar") {
 			bounceBall ();
@@ -64,7 +69,7 @@ public class BallScript : MonoBehaviour {
 	}
 
 	void restartOver() {
-		if (myBody.position.x > 0) {
+		if (ballRb.position.x > 0) {
 			playerSc.scr1++;
 			score1.text = "" + playerSc.scr1;
 		} else {
@@ -81,7 +86,7 @@ public class BallScript : MonoBehaviour {
 
 	void changeLevel(int scr1, int scr2){
 		print ("changeLevel");
-		if (scr1+ scr2 == 15) {
+		if (scr1 + scr2 == 15) {
 			loadOnClick.loadScene (4);
 		}
 		
@@ -89,7 +94,7 @@ public class BallScript : MonoBehaviour {
 	}
 
 	void bounceBall() {
-		int direct = (myBody.position.x > 0)?( -1):(1);
+		int direct = (ballRb.position.x > 0)?( -1):(1);
 
 		randomAngle = getRandonAngle (false);
 
