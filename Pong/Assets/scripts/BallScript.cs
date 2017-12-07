@@ -27,35 +27,39 @@ public class BallScript : MonoBehaviour {
 
 	// Adiciona uma força inicial
 	void Start () {
+
 		ballTr = GetComponent<Transform> ();
 		ballRb = GetComponent<Rigidbody2D>();
+
+		//barRb = GameObject.Find ("player_01").GetComponent<Rigidbody2D> ();
+		//enBarRb = GameObject.Find ("player_02").GetComponent<Rigidbody2D> ();
+		playerSc = GameObject.Find ("player_01").GetComponent<PlayerBar> ();
+		enemySc = GameObject.Find ("player_02").GetComponent<EnemyBar> ();
+
+		barRb = playerSc.GetComponent<Rigidbody2D> ();
+		enBarRb = enemySc.GetComponent<Rigidbody2D> ();				
 
 		score1 = GameObject.Find ("Score1").GetComponent<Text> ();
 		score2 = GameObject.Find ("Score2").GetComponent<Text> ();
 
-		playerSc = GameObject.Find ("player_01").GetComponent<PlayerBar> ();
-		enemySc = GameObject.Find ("player_02").GetComponent<EnemyBar> ();
-
-		barRb = GameObject.Find ("player_01").GetComponent<Rigidbody2D> ();
-		enBarRb = GameObject.Find ("player_02").GetComponent<Rigidbody2D> ();
-
 		//ballRb.AddForce (new Vector2 (forceValue * 50, 50));
-
 		pos = ballTr.position;
 
+		//velocity ball
 		speed = 8f;
-
+		//Random Position
 		randomAngle = getRandonAngle (true);
 		velBX = Mathf.Cos (randomAngle) * speed;
 		velBY = Mathf.Sin (randomAngle) * speed;
 	}
 
-	// Nada no update
+
 	void Update () {
 		ballRb.velocity = new Vector2 (velBX, velBY);
 
-		if (ballRb.position.x > enBarRb.position.x || ballRb.position.x < barRb.position.x)
-			restartOver();
+		if (ballRb.position.x > enBarRb.position.x || ballRb.position.x < barRb.position.x) {
+			restartOver ();
+		}
 	}
 
 	void OnCollisionEnter2D (Collision2D colisao) {
@@ -76,20 +80,28 @@ public class BallScript : MonoBehaviour {
 			enemySc.scr2++;
 			score2.text = "" + enemySc.scr2;
 		}
-
-		Instantiate (ballPrefab, pos, transform.localRotation);
-		//changeLevel (playerSc.scr1, enemySc.scr2);
-		Destroy (this.gameObject);
-		//changeLevel (playerSc.scr1, enemySc.scr2); 
+			
+		//Instantiate (ballPrefab, pos, transform.localRotation);
+		//Destroy (this.gameObject);
+		changeLevel (playerSc.scr1, enemySc.scr2); 
+		ballRb.transform.position = new Vector3 (0, 0, 0);
 
 	}
 
 	void changeLevel(int scr1, int scr2){
 		print ("changeLevel");
-		if (scr1 + scr2 == 15) {
-			loadOnClick.loadScene (4);
+		if (scr1 + scr2 == 5) {
+			//decrease player bar size
+			playerSc.transform.localScale -= new Vector3 (0, 0.2F, 0);
+		} else if (scr1 + scr2 == 10) {
+			//decrease ball
+			playerSc.transform.localScale += new Vector3 (0, 0.2F, 0);
+			ballRb.transform.localScale -= new Vector3 (0, 0.3F, 0);
+		} else if (scr1 + scr2 == 15) {
+			ballRb.transform.localScale += new Vector3 (0, 0.3F, 0);
+
 		}
-		
+
 
 	}
 

@@ -7,6 +7,7 @@ public class LoadOnClick : MonoBehaviour {
 
 	public void loadScene(int dest)
 	{
+		print (dest);
 		if (dest == 2) {
 			GameInit.vsCPU = 0;
 			dest = dest - 1;
