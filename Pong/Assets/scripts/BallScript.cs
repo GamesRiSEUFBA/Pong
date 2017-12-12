@@ -6,12 +6,10 @@ public class BallScript : MonoBehaviour {
 
 	public GameObject ballPrefab;
 
-	private Rigidbody2D barRb;
-	private Rigidbody2D enBarRb;
+	private Rigidbody2D barRb, ballRb, enBarRb;
 
-	private Rigidbody2D ballRb;
 	private Transform ballTr;
-	private Vector3 pos;
+	public Vector3 pos;
 
 	private Text score1;
 	private Text score2;
@@ -19,15 +17,14 @@ public class BallScript : MonoBehaviour {
 	private PlayerBar playerSc;
 	private EnemyBar enemySc;
 
-	private LoadOnClick loadOnClick;
-
 	private float velBX, velBY;
 	public float speed;
 	private float randomAngle;
 
+	private Vector3 initScaleBar, initScaleBall;
+
 	// Adiciona uma força inicial
 	void Start () {
-
 		ballTr = GetComponent<Transform> ();
 		ballRb = GetComponent<Rigidbody2D>();
 
@@ -39,6 +36,9 @@ public class BallScript : MonoBehaviour {
 		barRb = playerSc.GetComponent<Rigidbody2D> ();
 		enBarRb = enemySc.GetComponent<Rigidbody2D> ();				
 
+		initScaleBar = playerSc.transform.localScale;
+		initScaleBall = ballTr.localScale;
+
 		score1 = GameObject.Find ("Score1").GetComponent<Text> ();
 		score2 = GameObject.Find ("Score2").GetComponent<Text> ();
 
@@ -46,7 +46,7 @@ public class BallScript : MonoBehaviour {
 		pos = ballTr.position;
 
 		//velocity ball
-		speed = 8f;
+		speed = 8.5f;
 		//Random Position
 		randomAngle = getRandonAngle (true);
 		velBX = Mathf.Cos (randomAngle) * speed;
@@ -83,26 +83,18 @@ public class BallScript : MonoBehaviour {
 			
 		//Instantiate (ballPrefab, pos, transform.localRotation);
 		//Destroy (this.gameObject);
-		changeLevel (playerSc.scr1, enemySc.scr2); 
+
+		ChangerLevel cLv = Camera.main.GetComponent<ChangerLevel> ();
+		cLv.changeLevel (playerSc.scr1, enemySc.scr2, initScaleBar, initScaleBall);
+		//changeLevel (playerSc.scr1, enemySc.scr2); 
+
 		ballRb.transform.position = new Vector3 (0, 0, 0);
 
-	}
+		speed += 0.1f;
 
-	void changeLevel(int scr1, int scr2){
-		print ("changeLevel");
-		if (scr1 + scr2 == 5) {
-			//decrease player bar size
-			playerSc.transform.localScale -= new Vector3 (0, 0.2F, 0);
-		} else if (scr1 + scr2 == 10) {
-			//decrease ball
-			playerSc.transform.localScale += new Vector3 (0, 0.2F, 0);
-			ballRb.transform.localScale -= new Vector3 (0, 0.3F, 0);
-		} else if (scr1 + scr2 == 15) {
-			ballRb.transform.localScale += new Vector3 (0, 0.3F, 0);
-
-		}
-
-
+		randomAngle = getRandonAngle (true);
+		velBX = Mathf.Cos (randomAngle) * speed;
+		velBY = Mathf.Sin (randomAngle) * speed;
 	}
 
 	void bounceBall() {
@@ -116,8 +108,8 @@ public class BallScript : MonoBehaviour {
 		else
 			dir = -1;
 
-		velBX = direct * Mathf.Cos(randomAngle) * speed * 1.3f;
-		velBY = dir * Mathf.Sin (randomAngle) * speed * 1.3f;
+		velBX = direct * Mathf.Cos(randomAngle) * speed;
+		velBY = dir * Mathf.Sin (randomAngle) * speed;
 	}
 
 	float getRandonAngle(bool init) {

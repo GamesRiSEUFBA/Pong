@@ -7,32 +7,31 @@ public class PlayerBar : MonoBehaviour {
 
 	private Rigidbody2D barRb;
 	private bool upKeyPressed = false, downKeyPressed = false;
-	private int barDirection = 0;
+	private int barDirection = 0; // 0 = parado, 1= cima, -1 = baixo
 
 	public int scr1;
 
-	int direction = 0; // 0 = parado, 1= cima, -1 = baixo
-
-	public uint barVelocity;
+	private float barVelocity;
 
 	void Start () {
-		barRb = GetComponent<Rigidbody2D> ();	
-		barRb.velocity = new Vector2(barRb.velocity.x, barDirection * ((int) barVelocity));
+		barRb = GetComponent<Rigidbody2D> ();
+		barVelocity = GameInit.barSpeed;
+		barRb.velocity = new Vector2(barRb.velocity.x, barDirection * barVelocity);
 	}
 
 	void Update () {
 		if (Input.GetKeyDown (KeyCode.Escape))
 			SceneManager.LoadScene (0, LoadSceneMode.Single);
 
-		if (Input.GetKeyDown (KeyCode.UpArrow)) {
+		if (Input.GetKeyDown (KeyCode.Q)) {
 			upKeyPressed = true;
-		} else if (Input.GetKeyDown (KeyCode.DownArrow)) {
+		} else if (Input.GetKeyDown (KeyCode.A)) {
 			downKeyPressed = true;
 		}
 
-		if (Input.GetKeyUp (KeyCode.UpArrow)) {
+		if (Input.GetKeyUp (KeyCode.Q)) {
 			upKeyPressed = false;
-		} else if (Input.GetKeyUp (KeyCode.DownArrow)) {
+		} else if (Input.GetKeyUp (KeyCode.A)) {
 			downKeyPressed = false;
 		}
 
@@ -43,6 +42,8 @@ public class PlayerBar : MonoBehaviour {
 		else
 			barDirection = 0;
 
-		barRb.velocity = new Vector2(barRb.velocity.x, barDirection * ((int) barVelocity));
+		barVelocity = GameInit.barSpeed;
+
+		barRb.velocity = new Vector2(barRb.velocity.x, barDirection * barVelocity);
 	}
 }

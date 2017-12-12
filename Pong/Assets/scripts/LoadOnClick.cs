@@ -10,10 +10,12 @@ public class LoadOnClick : MonoBehaviour {
 		print (dest);
 		if (dest == 2) {
 			GameInit.vsCPU = 0;
-			dest = dest - 1;
-		} else {
+			dest--;
+		} else if (dest == 3)
+			dest--;
+		else
 			GameInit.vsCPU = 1;
-		}
+		
 		print (dest);
 		//Application.LoadLevel (opc);
 		SceneManager.LoadScene(dest, LoadSceneMode.Single);

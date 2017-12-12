@@ -11,12 +11,12 @@ public class EnemyBar : MonoBehaviour {
 	private bool upKeyPressed = false, downKeyPressed = false;
 	public int scr2;
 
-	public uint enBarVelocity;
+	private float enBarVelocity;
 
 	void Start () {
 		enBarRb = GetComponent<Rigidbody2D> ();
 		enBarBc = GetComponent<BoxCollider2D> ();
-
+		enBarVelocity = GameInit.barSpeed;
 		_ballRb = GameObject.FindGameObjectWithTag("ball").GetComponent<Rigidbody2D> ();
 	}
 	
@@ -30,20 +30,20 @@ public class EnemyBar : MonoBehaviour {
 
 			if (_ballRb.position.y > enBarRb.position.y + enBarBc.size.y / 2
 			    || _ballRb.position.y < enBarRb.position.y - enBarBc.size.y / 2)
-				enBarRb.velocity = new Vector2 (enBarRb.velocity.x, enBarDirection * ((int)enBarVelocity));
+				enBarRb.velocity = new Vector2 (enBarRb.velocity.x, enBarDirection * enBarVelocity);
 			else
 				enBarRb.velocity = new Vector2 (enBarRb.velocity.x, 0);
 		} else {
 
-			if (Input.GetKeyDown (KeyCode.Q)) {
+			if (Input.GetKeyDown (KeyCode.UpArrow)) {
 				upKeyPressed = true;
-			} else if (Input.GetKeyDown (KeyCode.A)) {
+			} else if (Input.GetKeyDown (KeyCode.DownArrow)) {
 				downKeyPressed = true;
 			}
 
-			if (Input.GetKeyUp (KeyCode.Q)) {
+			if (Input.GetKeyUp (KeyCode.UpArrow)) {
 				upKeyPressed = false;
-			} else if (Input.GetKeyUp (KeyCode.A)) {
+			} else if (Input.GetKeyUp (KeyCode.DownArrow)) {
 				downKeyPressed = false;
 			}
 
@@ -54,8 +54,9 @@ public class EnemyBar : MonoBehaviour {
 			else
 				enBarDirection = 0;
 
-			enBarRb.velocity = new Vector2(enBarRb.velocity.x, enBarDirection * ((int) enBarVelocity));
+			enBarVelocity = GameInit.barSpeed;
 
+			enBarRb.velocity = new Vector2(enBarRb.velocity.x, enBarDirection * enBarVelocity);
 		}
 	}
 }
