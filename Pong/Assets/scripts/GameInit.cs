@@ -5,6 +5,6 @@ using UnityEngine;
 public class GameInit : MonoBehaviour {
 
 	public static int vsCPU = 1;
-	public static float barSpeed = 7;
+	public static float barSpeed = 8;
 
 }

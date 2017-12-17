@@ -6,9 +6,12 @@ using UnityEngine;
 public class ChangerLevel : MonoBehaviour {
 
 	private BallScript ballSc;
+	private EnemyBar enbarSc;
 
 	private Transform enemyTr;
 	private Transform playerTr;
+
+	private bool twoBalls = false;
 
 	//private RectTransform panel;
 	//private Text warning;
@@ -18,6 +21,7 @@ public class ChangerLevel : MonoBehaviour {
 		playerTr = GameObject.Find ("player_01").GetComponent<Transform> ();
 		enemyTr = GameObject.Find ("player_02").GetComponent<Transform> ();
 		ballSc = GameObject.Find ("ball").GetComponent<BallScript> ();
+		enbarSc = GameObject.Find ("player_02").GetComponent<EnemyBar> ();
 
 		//warning = GameObject.Find ("Warning").GetComponent<Text> ();
 		//panel = GameObject.Find ("Panel").GetComponent<RectTransform> ();
@@ -55,12 +59,14 @@ public class ChangerLevel : MonoBehaviour {
 				ballSc.transform.localScale -= new Vector3 (0.2F, 0.2F, 0);
 		} 
 
-		if (scr1 <= 15 && scr2 <= 15 && (scr1 == 15 || scr2 == 15)) {
+		if (!twoBalls && scr1 <= 15 && scr2 <= 15 && (scr1 == 15 || scr2 == 15)) {
 			// Add a ball
+			twoBalls = true;
 			Instantiate (ballSc.ballPrefab, ballSc.pos, transform.localRotation);
 			playerTr.localScale = initScaleBar;
 			enemyTr.localScale = initScaleBar;
 			GameInit.barSpeed += 1.5F;
+			enbarSc.cover = 3;
 		}
 	}
 }

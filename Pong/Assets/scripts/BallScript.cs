@@ -46,7 +46,7 @@ public class BallScript : MonoBehaviour {
 		pos = ballTr.position;
 
 		//velocity ball
-		speed = 8.5f;
+		speed = 8f;
 		//Random Position
 		randomAngle = getRandonAngle (true);
 		velBX = Mathf.Cos (randomAngle) * speed;
