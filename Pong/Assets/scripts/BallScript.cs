@@ -83,10 +83,10 @@ public class BallScript : MonoBehaviour {
 			
 		//Instantiate (ballPrefab, pos, transform.localRotation);
 		//Destroy (this.gameObject);
+		string win = (playerSc.scr1 > enemySc.scr2) ? "Player 1" : "Player 2";
 
 		ChangerLevel cLv = Camera.main.GetComponent<ChangerLevel> ();
-		cLv.changeLevel (playerSc.scr1, enemySc.scr2, initScaleBar, initScaleBall);
-		//changeLevel (playerSc.scr1, enemySc.scr2); 
+		cLv.changeLevel (playerSc.scr1, enemySc.scr2, initScaleBar, initScaleBall, win);
 
 		ballRb.transform.position = new Vector3 (0, 0, 0);
 

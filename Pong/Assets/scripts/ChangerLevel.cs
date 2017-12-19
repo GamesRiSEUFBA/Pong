@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 using UnityEngine;
 
@@ -30,9 +31,14 @@ public class ChangerLevel : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {}
 		
-	public void changeLevel(int scr1, int scr2, Vector3 initScaleBar, Vector3 initScaleBall){
+	public void changeLevel(int scr1, int scr2, Vector3 initScaleBar, Vector3 initScaleBall, string winner){
 		if (scr1 + scr2 == 0)
 			return;
+
+		if (scr1 == 30 || scr2 == 30) {
+			GameInit.winner = winner;
+			SceneManager.LoadScene (3, LoadSceneMode.Single);
+		}
 		
 		print ("changeLevel");
 
