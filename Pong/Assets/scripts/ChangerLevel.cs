@@ -10,6 +10,7 @@ public class ChangerLevel : MonoBehaviour {
 
 	private Transform enemyTr;
 	private Transform playerTr;
+	public managerUI mUI;
 
 	private bool twoBalls = false;
 
@@ -68,5 +69,20 @@ public class ChangerLevel : MonoBehaviour {
 			GameInit.barSpeed += 1.5F;
 			enbarSc.cover = 3;
 		}
+
+
+		//finalizar quando chegar no somatorio igual a 50
+		if ((scr1 == 3) || (scr2 == 3)) {
+			if (GameInit.vsCPU == 1) {
+				
+			}
+
+			mUI.gameOver ();
+			//chamar gameOver com o listar ranking com os 5 maiores pontuadores.
+			// GameInit.vsCPU == 1; Ignorar pontuação do inimigo
+
+
+		}
+
 	}
 }
