@@ -558,6 +558,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 60019ffcaebdc46be80ba2aff2355810, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  mUI: {fileID: 1983414977}
 --- !u!1 &495684244
 GameObject:
   m_ObjectHideFlags: 0
@@ -1441,7 +1442,7 @@ Canvas:
   m_OverridePixelPerfect: 0
   m_SortingBucketNormalizedSize: 0
   m_AdditionalShaderChannelsFlag: 0
-  m_SortingLayerID: 0
+  m_SortingLayerID: -1534778643
   m_SortingOrder: -1
   m_TargetDisplay: 0
 --- !u!224 &1983414976
