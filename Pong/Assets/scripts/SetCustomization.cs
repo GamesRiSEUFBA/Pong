@@ -32,8 +32,6 @@ public class SetCustomization : MonoBehaviour
 		cam = GetComponent<Camera> ();
 		backMat = Resources.Load ("Materials/MatBack") as Material;	
 
-		cam.backgroundColor = backMat.color;
-
 		barRSlider = GameObject.Find ("SliderBarR").GetComponent<Slider> ();
 		barGSlider = GameObject.Find ("SliderBarG").GetComponent<Slider> ();
 		barBSlider = GameObject.Find ("SliderBarB").GetComponent<Slider> ();
@@ -53,6 +51,13 @@ public class SetCustomization : MonoBehaviour
 		barMat = GameObject.Find ("player_01").GetComponent<Renderer> ().sharedMaterial;
 		ballMat = GameObject.Find ("ball").GetComponent<Renderer> ().sharedMaterial;
 		lineMat = GameObject.Find ("linhaPNGBranca").GetComponent<Renderer> ().sharedMaterial;
+
+		ballMat.color = new Color(PlayerPrefs.GetFloat("ballMatR"), PlayerPrefs.GetFloat("ballMatG"), PlayerPrefs.GetFloat("ballMatB"));
+		barMat.color = new Color(PlayerPrefs.GetFloat("barMatR"), PlayerPrefs.GetFloat("barMatG"), PlayerPrefs.GetFloat("barMatB"));
+		lineMat.color = new Color(PlayerPrefs.GetFloat("lineMatR"), PlayerPrefs.GetFloat("lineMatG"), PlayerPrefs.GetFloat("lineMatB"));
+		backMat.color = new Color (PlayerPrefs.GetFloat ("backMatR"), PlayerPrefs.GetFloat ("backMatG"), PlayerPrefs.GetFloat ("backMatB"));
+
+		cam.backgroundColor = backMat.color;
 
 		barRSlider.value = barMat.color.r;
 		barGSlider.value = barMat.color.g;
@@ -91,11 +96,34 @@ public class SetCustomization : MonoBehaviour
 	// Invoked when the value of the slider changes.
 	public void ValueChangeCheck()
 	{
-		barMat.color = new Color(barRSlider.value, barGSlider.value, barBSlider.value);
-		ballMat.color = new Color(ballRSlider.value, ballGSlider.value, ballBSlider.value);
-		lineMat.color = new Color(lineRSlider.value, lineGSlider.value, lineBSlider.value);
+		Variables.barMat = new Color(barRSlider.value, barGSlider.value, barBSlider.value);
+		Variables.ballMat = new Color(ballRSlider.value, ballGSlider.value, ballBSlider.value);
+		Variables.lineMat = new Color(lineRSlider.value, lineGSlider.value, lineBSlider.value);
 
-		backMat.color = new Color(backRSlider.value, backGSlider.value, backBSlider.value);
-		cam.backgroundColor = backMat.color;
+		Variables.backMat = new Color(backRSlider.value, backGSlider.value, backBSlider.value);
+		cam.backgroundColor = Variables.backMat;
+
+		barMat.color = Variables.barMat;
+		ballMat.color = Variables.ballMat;
+		lineMat.color = Variables.lineMat;
+		backMat.color = Variables.backMat;
+
+		PlayerPrefs.SetFloat ("backMatR", backMat.color.r);
+		PlayerPrefs.SetFloat ("backMatG", backMat.color.g);
+		PlayerPrefs.SetFloat ("backMatB", backMat.color.b);
+
+		PlayerPrefs.SetFloat ("ballMatR", ballMat.color.r);
+		PlayerPrefs.SetFloat ("ballMatG", ballMat.color.g);
+		PlayerPrefs.SetFloat ("ballMatB", ballMat.color.b);
+
+		PlayerPrefs.SetFloat ("barMatR", barMat.color.r);
+		PlayerPrefs.SetFloat ("barMatG", barMat.color.g);
+		PlayerPrefs.SetFloat ("barMatB", barMat.color.b);
+
+		PlayerPrefs.SetFloat ("lineMatR", lineMat.color.r);
+		PlayerPrefs.SetFloat ("lineMatG", lineMat.color.g);
+		PlayerPrefs.SetFloat ("lineMatB", lineMat.color.b);
+
+		PlayerPrefs.Save ();
 	}
 }

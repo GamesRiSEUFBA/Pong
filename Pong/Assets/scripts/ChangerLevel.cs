@@ -36,13 +36,13 @@ public class ChangerLevel : MonoBehaviour {
 			return;
 
 		if (scr1 == 30 || scr2 == 30) {
-			GameInit.winner = winner;
+			Variables.winner = winner;
 			SceneManager.LoadScene (3, LoadSceneMode.Single);
 		}
 		
 		print ("changeLevel");
 
-		if ((scr1 + scr2)%5 == 0) {
+		if ((scr1 + scr2)%1 == 0) {
 			// Change bar size
 			if (scr1 < scr2)
 				if ((playerTr.localScale.y - 0.2)/initScaleBar.y > 0.3) 
@@ -71,7 +71,7 @@ public class ChangerLevel : MonoBehaviour {
 			Instantiate (ballSc.ballPrefab, ballSc.pos, transform.localRotation);
 			playerTr.localScale = initScaleBar;
 			enemyTr.localScale = initScaleBar;
-			GameInit.barSpeed += 1.5F;
+			Variables.barSpeed += 1.5F;
 			enbarSc.cover = 3;
 		}
 	}

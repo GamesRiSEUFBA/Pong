@@ -5,7 +5,12 @@ using UnityEngine;
 
 public class GameOver : MonoBehaviour {
 
+	private Material backMat;
+
 	void Start () {
-		GameObject.Find("Winner").GetComponent<Text> ().text = GameInit.winner;
+		GameObject.Find("Winner").GetComponent<Text> ().text = Variables.winner;
+
+		backMat = Resources.Load ("Materials/MatBack") as Material;	
+		backMat.color = Variables.backMat;
 	}
 }

@@ -18,24 +18,24 @@ public class EnemyBar : MonoBehaviour {
 	void Start () {
 		enBarRb = GetComponent<Rigidbody2D> ();
 		enBarBc = GetComponent<BoxCollider2D> ();
-		enBarVelocity = GameInit.barSpeed;
+		enBarVelocity = Variables.barSpeed;
 	}
 	
 	// Update is called once per frame
 	void Update () {
-		List<Rigidbody2D> _ballsRb = new List<Rigidbody2D>();
+		if (Variables.vsCPU == 1) {
+			List<Rigidbody2D> _ballsRb = new List<Rigidbody2D>();
 
-		GameObject[] _balls = GameObject.FindGameObjectsWithTag ("ball");
-		foreach (GameObject obj in _balls)
-			_ballsRb.Add (obj.GetComponent<Rigidbody2D>());
+			GameObject[] _balls = GameObject.FindGameObjectsWithTag ("ball");
+			foreach (GameObject obj in _balls)
+				_ballsRb.Add (obj.GetComponent<Rigidbody2D>());
 
-		smallPosXBall = _ballsRb.ToArray () [0];
-		foreach (Rigidbody2D rb in _ballsRb) {
-			if (smallPosXBall.position.x < rb.position.x)
-				smallPosXBall = rb;
-		}
+			smallPosXBall = _ballsRb.ToArray () [0];
+			foreach (Rigidbody2D rb in _ballsRb) {
+				if (smallPosXBall.position.x < rb.position.x)
+					smallPosXBall = rb;
+			}
 
-		if (GameInit.vsCPU == 1) {
 			_ballRb = smallPosXBall;
 
 			enBarDirection = (_ballRb.position.y < enBarRb.position.y) ? -1 : 1;
@@ -45,6 +45,8 @@ public class EnemyBar : MonoBehaviour {
 				enBarRb.velocity = new Vector2 (enBarRb.velocity.x, enBarDirection * enBarVelocity);
 			else
 				enBarRb.velocity = new Vector2 (enBarRb.velocity.x, 0);
+
+			enBarBc = GetComponent<BoxCollider2D> ();
 		} else {
 
 			if (Input.GetKeyDown (KeyCode.UpArrow)) {
@@ -66,7 +68,7 @@ public class EnemyBar : MonoBehaviour {
 			else
 				enBarDirection = 0;
 
-			enBarVelocity = GameInit.barSpeed;
+			enBarVelocity = Variables.barSpeed;
 
 			enBarRb.velocity = new Vector2(enBarRb.velocity.x, enBarDirection * enBarVelocity);
 		}

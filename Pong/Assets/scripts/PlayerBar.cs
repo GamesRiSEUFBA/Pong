@@ -15,7 +15,7 @@ public class PlayerBar : MonoBehaviour {
 
 	void Start () {
 		barRb = GetComponent<Rigidbody2D> ();
-		barVelocity = GameInit.barSpeed;
+		barVelocity = Variables.barSpeed;
 		barRb.velocity = new Vector2(barRb.velocity.x, barDirection * barVelocity);
 	}
 
@@ -42,7 +42,7 @@ public class PlayerBar : MonoBehaviour {
 		else
 			barDirection = 0;
 
-		barVelocity = GameInit.barSpeed;
+		barVelocity = Variables.barSpeed;
 
 		barRb.velocity = new Vector2(barRb.velocity.x, barDirection * barVelocity);
 	}

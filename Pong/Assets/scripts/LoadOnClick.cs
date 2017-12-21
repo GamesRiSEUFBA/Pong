@@ -9,9 +9,9 @@ public class LoadOnClick : MonoBehaviour {
 	{
 		print (dest);
 		if (dest == 1) {
-			GameInit.vsCPU = 1;
+			Variables.vsCPU = 1;
 		} else if (dest == 2) {
-			GameInit.vsCPU = 0;
+			Variables.vsCPU = 0;
 			dest--;
 		} else if (dest == 3) {
 			dest--;

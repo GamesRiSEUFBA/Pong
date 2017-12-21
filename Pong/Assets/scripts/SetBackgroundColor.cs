@@ -9,7 +9,8 @@ public class SetBackgroundColor : MonoBehaviour {
 	private Camera cam;
 
 	void Start () {
-		backMat = Resources.Load ("Materials/MatBack") as Material;	
+		backMat = Resources.Load ("Materials/MatBack") as Material;
+		backMat.color = Variables.backMat;
 		cam = GetComponent<Camera> ();
 		cam.backgroundColor = backMat.color;
 	}
